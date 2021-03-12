@@ -1,4 +1,12 @@
-# restauking
+# Restauking
+## Made by
+- NICOLLET Gautier
+- LAURADOUX Alexis
+## Distribution of work
+### NICOLLET Gautier
+-
+### LAURADOUX Alexis
+-
 
 ## Project setup
 ```
