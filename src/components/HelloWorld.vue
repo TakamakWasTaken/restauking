@@ -35,7 +35,11 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  }
+  },
+   mounted: function () {
+     this.$store.commit('getRestaurants');
+     console.log(this.$store);
+    }
 }
 </script>
 

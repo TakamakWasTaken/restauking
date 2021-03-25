@@ -1,9 +1,12 @@
-const moduleRestaurant = {
-    state: () => ({
+import {getRestaurantsAPI } from '../../api/yelpAPI'
+
+export default {
+    state: {
         restaurants: {}
-      }),
+      },
     mutations: {
-        getRestaurants () {
+        getRestaurants ()  {
+          getRestaurantsAPI();
         }
       },
     actions: {

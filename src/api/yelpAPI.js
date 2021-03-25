@@ -1,19 +1,16 @@
-export default {
-    //TO-DO https://github.com/Rob--W/cors-anywhere#demo-server
-    getRestaurants : () => {
-        var cors_api_host = 'cors-anywhere.herokuapp.com';
-        var cors_api_url = 'https://' + cors_api_host + '/';
-        var slice = [].slice;
-        var origin = window.location.protocol + '//' + window.location.host;
-        var open = XMLHttpRequest.prototype.open;
-        XMLHttpRequest.prototype.open = function() {
-            var args = slice.call(arguments);
-            var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
-            if (targetOrigin && targetOrigin[0].toLowerCase() !== origin &&
-                targetOrigin[1] !== cors_api_host) {
-                args[1] = cors_api_url + args[1];
-            }
-            return open.apply(this, args);
-        };
-    },
+const token = '-FTGpJLIuc3Lbd9CTKfZ-ZajG9KmHyUCcYu0Alz20p1vL_8Z2rHwfS6oEfRSdSNkVGQjhFifC6fXb_KbvuXch8BF2pYms-1x-6JPufiDTUxm1dfJZ-xXT239J_RYYHYx'
+const config = {
+    headers: { Authorization: `Bearer ${token}` }
+};
+
+
+function getRestaurantsAPI (search) {
+    if(search == null)
+    search ='';
+    const axios = require('axios');
+    axios
+    .get('https://restauking.azurewebsites.net/restauking?param=https://api.yelp.com/v3/businesses/search?location="Lyon"&categories="Restaurants"',
+    config)
+    .then(response => (console.log( response)));
 }
+export {getRestaurantsAPI}
