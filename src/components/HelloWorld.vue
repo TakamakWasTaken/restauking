@@ -37,8 +37,8 @@ export default {
     msg: String
   },
    mounted: function () {
-     this.$store.commit('getRestaurants');
-     console.log(this.$store);
+     this.$store.dispatch('getRestaurantsAsync');
+     this.$store.dispatch('getRestaurantsAsync',{location:'Clermont-Ferrand',search:'',is_closed:true,categories:'Fast Food'});
     }
 }
 </script>
