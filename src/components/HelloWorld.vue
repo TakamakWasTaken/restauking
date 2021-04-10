@@ -40,10 +40,8 @@
               size="24"
               :value="r.rating"
             ></v-rating>
-            <v-btn color="secondary" small elevation="2">
-              <router-link style="text-decoration: none; color: white;" :to="{ name: 'Details', params: { restaurantId: r.id }}">Voir le détail</router-link>
-              
-            </v-btn>
+            <router-link class="detailsBtn" tag="button" :to="{ name: 'Details', params: { restaurantId: r.id }}">Voir le détail</router-link>
+
           </div>
         </v-card>
       </v-flex>
