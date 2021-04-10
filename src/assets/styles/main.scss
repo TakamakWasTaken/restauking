@@ -13,19 +13,37 @@ a {
     color: #42b983;
 }
 
-.flexContainer{
+.restoCardContainer{
     flex-direction: row;
     
     .restoCard{
+        width:95%;
+        height:410px;
         margin-bottom: 10px;
-        .restaurantLocation{
-            text-align: left;
-            padding: 5px;
-        }
         .restaurantImg{
             height: 200px;
             margin: auto;
-            
+            height: 50%;
+        }
+        .restaurantInfos{
+            height: 50%;
+            padding: 0 10px;
+            .restaurantLocation{
+                text-align: left;
+                padding-bottom: 5px;
+                display: flex;
+                .logoPosition{
+                    vertical-align: middle;
+                    max-height: 21px;
+                }
+            }
+            .categoryContainer{
+                .restaurantCategory{
+                    width:fit-content;
+                    padding:5px;
+                    margin-right: 10px;
+                }
+            }
         }
     }
 }
