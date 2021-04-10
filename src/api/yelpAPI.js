@@ -8,18 +8,18 @@ async function getRestaurantsAPI (location,search,is_closed,categories) {
     var url = 'https://restauking.azurewebsites.net/restauking?param=https://api.yelp.com/v3/businesses/search?'
     
     if(location != null)
-    url += 'location="'+location+'"'
+        url += 'location="'+location+'"'
     else
-    url += 'location="Lyon"'
+        url += 'location="Lyon"'
 
     // url += '&limit=30'
     // url += '&offest=950'
 
     if(search != null)
-    url += '&term="'+search+'"'
+        url += '&term="'+search+'"'
 
     if(is_closed != null)
-    url += '&is_closed='+is_closed+''
+        url += '&is_closed='+is_closed+''
 
     if(categories != null)
         url += '&categories="'+categories+'"'

@@ -1,13 +1,34 @@
 <template>
   <v-container>
    
-    <div v-if="this.restos != undefined">resto YES
-      <v-card v-for="r in restos" :key="r.id">
-        {{ r.name }}
-      </v-card>
-
-    </div>
-    <div v-else>resto NO</div>
+    <v-layout v-if="this.restos != undefined" align-center justify-center row fill-height>
+      <v-flex
+        v-for="r in restos"
+        :key="r.id"
+        xs4
+        sm3
+        class="flexContainer"
+      >
+        <v-card width="95%" height="380px" class="restoCard">
+          
+          <v-img v-if="r.image_url"
+            :src="`${ r.image_url }`"
+            class="restaurantImg"
+          ></v-img>
+          <v-img v-else
+            :src="require('../assets/restaurant-default.png')"
+            class="restaurantImg"
+          ></v-img>
+          <v-card-title primary-title>
+            <h2 class="headline mb-0">{{ r.name }}</h2>
+          </v-card-title>
+          <div class="restaurantLocation">{{ r.location.city }}
+          </div>
+        <v-card></v-card>
+        </v-card>
+      </v-flex>
+    </v-layout>
+    <div v-else>Searching restaurants</div>
   </v-container>
 </template>
 
@@ -24,23 +45,5 @@
        this.restos = this.$store.state.restaurant.restaurants;
      });
     }
-}
+  }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
