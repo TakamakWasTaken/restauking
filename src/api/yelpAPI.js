@@ -2,7 +2,6 @@
 // const config = {
 //     headers: { Authorization: `Bearer ${token}` }
 // }; Is set in the server for cors error
-
 const serverUrl = 'https://restauking.azurewebsites.net/restauking?param='
 const searchUrl = 'https://api.yelp.com/v3/businesses/search?'
 const detailsUrl = 'https://api.yelp.com/v3/businesses/'

@@ -1,0 +1,31 @@
+h3 {
+    margin: 40px 0 0;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    display: inline-block;
+    margin: 0 10px;
+}
+a {
+    color: #42b983;
+}
+
+.flexContainer{
+    flex-direction: row;
+    
+    .restoCard{
+        margin-bottom: 10px;
+        .restaurantLocation{
+            text-align: left;
+            padding: 5px;
+        }
+        .restaurantImg{
+            height: 200px;
+            margin: auto;
+            
+        }
+    }
+}
