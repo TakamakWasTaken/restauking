@@ -1,4 +1,5 @@
 # Restauking
+_**The king of the restaurant**_
 ## Made by
 - NICOLLET Gautier
 - LAURADOUX Alexis

@@ -35,7 +35,12 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  }
+  },
+   mounted: function () {
+     this.$store.dispatch('getRestaurantsAsync');
+     this.$store.dispatch('getRestaurantsAsync',{search:'',open_now:true,categories:'FastFood'});
+     this.$store.dispatch('getDetailsRestaurantAsync','4qS4kIbGlGfswmUY-o37_g');
+    }
 }
 </script>
 
