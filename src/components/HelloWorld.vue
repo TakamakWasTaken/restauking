@@ -31,8 +31,8 @@
             </v-layout>
             <div v-else>no cat</div>
             <v-rating
-              background-color="green lighten-2"
-              color="green"
+              background-color="blue lighten-2"
+              color="blue"
               half-increments
               hover
               readonly
@@ -41,10 +41,10 @@
               :value="r.rating"
             ></v-rating>
             <v-btn color="secondary" small elevation="2">
-              Voir le détail
+              <router-link style="text-decoration: none; color: white;" :to="{ name: 'Details', params: { restaurantId: r.id }}">Voir le détail</router-link>
+              
             </v-btn>
           </div>
-          
         </v-card>
       </v-flex>
     </v-layout>
