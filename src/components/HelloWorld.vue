@@ -41,9 +41,8 @@
     }),
    mounted: function () {
      this.$store.dispatch('getRestaurantsAsync');
-     this.$store.dispatch('getRestaurantsAsync',{location:'Clermont-Ferrand',search:'',is_closed:true,categories:'Fast Food'}).then(() => {
-       this.restos = this.$store.state.restaurant.restaurants;
-     });
+     this.$store.dispatch('getRestaurantsAsync',{search:'',open_now:true,categories:'FastFood'});
+     this.$store.dispatch('getDetailsRestaurantAsync','4qS4kIbGlGfswmUY-o37_g');
     }
   }
 </script>
