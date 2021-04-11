@@ -28,9 +28,9 @@ on:
     types: # This configuration does not affect the page_build event above
       - created
 env:
-  AZURE_WEBAPP_NAME: 'restauking-prod'    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '14'                # set this to the node version to use
+  AZURE_WEBAPP_NAME: "restauking-prod"
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
+  NODE_VERSION: '14'
 
 jobs:
   build-and-deploy:
