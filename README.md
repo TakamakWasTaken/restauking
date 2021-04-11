@@ -5,25 +5,25 @@ _**The king of the restaurant**_
 - LAURADOUX Alexis
 ## Distribution of work
 ### NICOLLET Gautier
-- Vuetify
-Add Vuetify
-View list restaurants
-Rating component
+- Vuetify  
+Add Vuetify  
+View list restaurants  
+Rating component  
 
 ### LAURADOUX Alexis
-- .net core server for YelpAPI
-A small api proxy for the request to YelpAPI.
+- .net core server for YelpAPI  
+A small api proxy for the request to YelpAPI.  
 Host in azure
-- YelpAPI
+- YelpAPI  
 All request to the api
-- Firebase
-All request to firebase
-Create, update and read bookings
-- Payement API
+- Firebase  
+All request to firebase  
+Create, update and read bookings  
+- Payement API  
 The navigator payement request
-- VueX 
-Add Vuex 
-Add store
+- VueX     
+Add Vuex   
+Add store  
 Add module restaurant and reservation
 
 ## Project setup
