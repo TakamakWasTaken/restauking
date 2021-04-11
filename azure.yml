@@ -16,13 +16,22 @@
 # For more information on GitHub Actions for Azure, refer to https://github.com/Azure/Actions
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
 on:
+ push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  # Also trigger on page_build, as well as release created events
+  page_build:
   release:
-    types: [created]
+    types: # This configuration does not affect the page_build event above
+      - created
 
 env:
   AZURE_WEBAPP_NAME: restauking-prod    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '10.0'                # set this to the node version to use
+  NODE_VERSION: '14.15'                # set this to the node version to use
 
 jobs:
   build-and-deploy:
