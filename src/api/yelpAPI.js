@@ -5,6 +5,8 @@
 const serverUrl = 'https://restauking.azurewebsites.net/restauking?param='
 const searchUrl = 'https://api.yelp.com/v3/businesses/search?'
 const detailsUrl = 'https://api.yelp.com/v3/businesses/'
+const autoCompleteUrl = 'https://api.yelp.com/v3/autocomplete'
+const categoriesUrl = 'https://api.yelp.com/v3/categories'
 
 async function getRestaurantsAPI (location,search,open_now,categories) {
     var url = 'limit=50&offest=940';
@@ -22,7 +24,7 @@ async function getRestaurantsAPI (location,search,open_now,categories) {
     if(categories != null && categories != '')
         url += '&categories="'+categories+'"'
     else
-        url += '&categories="Restaurants"'
+        url += '&categories="restaurants"'
 
     const axios = require('axios');
     try {
@@ -31,6 +33,24 @@ async function getRestaurantsAPI (location,search,open_now,categories) {
     const response =  await axios.get(serverUrl + encodeURIComponent(searchUrl+url))
 
     console.log('getRestaurantsAPI(location:'+location+', search:'+search+', open_now:'+open_now+', categories:'+categories+')',response.data.businesses)
+    
+    return response.data.businesses
+    } catch (error) {
+       console.log(error) 
+    }
+}
+async function getAutoCompleteRestaurantsAPI (search,latitude,longitude) {
+    url += '&text="'+search+'"'
+    url += '&latitude="'+latitude+'"'
+    url += '&longitude="'+longitude+'"'
+
+    const axios = require('axios');
+    try {
+        console.log('axios.get()',serverUrl + encodeURIComponent(autoCompleteUrl+url))
+    
+    const response =  await axios.get(serverUrl + encodeURIComponent(autoCompleteUrl+url))
+
+    console.log('getRestaurantsAPI(search:'+search+', latitude:'+latitude+', longitude:'+longitude+')',response.data.businesses)
     
     return response.data.businesses
     } catch (error) {
@@ -52,4 +72,32 @@ async function getRestaurantDetailsAPI (id) {
        console.log(error) 
     }
 }
-export {getRestaurantsAPI,getRestaurantDetailsAPI}
+async function getRestaurantDetailsAPI (id) {
+    const axios = require('axios');
+    try {
+        console.log('axios.get()',serverUrl + encodeURIComponent(detailsUrl+id))
+    
+    const response =  await axios.get(serverUrl + encodeURIComponent(detailsUrl+id))
+
+    console.log('getRestaurantDetailsAPI(id:'+id+')',response.data)
+    
+    return response.data
+    } catch (error) {
+       console.log(error) 
+    }
+}
+async function getCategoriesAPI () {
+    const axios = require('axios');
+    try {
+        console.log('axios.get()',serverUrl + encodeURIComponent(categoriesUrl))
+    
+    const response =  await axios.get(serverUrl + encodeURIComponent(categoriesUrl))
+
+    console.log('getCategoriesAPI()',response.data)
+    
+    return response.data
+    } catch (error) {
+       console.log(error) 
+    }
+}
+export {getRestaurantsAPI,getRestaurantDetailsAPI,getRestaurantsAPI,getCategoriesAPI,getAutoCompleteRestaurantsAPI}

@@ -1,13 +1,17 @@
-import {getRestaurantsAPI, getRestaurantDetailsAPI } from '../../api/yelpAPI'
+import {getRestaurantsAPI, getRestaurantDetailsAPI,getCategoriesAPI } from '../../api/yelpAPI'
 
 export default {
     state: {
         restaurants:  [],
+        categories:  [],
         detailsRestaurant: {},
       },
     mutations: {
         setRestaurants (state, restaurants)  {
           state.restaurants = restaurants ;
+        },
+        setCategories (state, categories)  {
+          state.categories = categories ;
         },
         setDetailsRestaurant (state, detailsRestaurant)  {
           state.detailsRestaurant = detailsRestaurant ;
@@ -22,6 +26,12 @@ export default {
         },
         async getDetailsRestaurantAsync (context,id) {
            context.commit('setDetailsRestaurant', await getRestaurantDetailsAPI(id))
-         }
+         },
+       async getCategoriesAsync (context) {
+          context.commit('setCategories', await getCategoriesAPI())
+        },
+        async getAutoCompleteRestaurantsAsync () {
+         return await getAutoCompleteRestaurantsAPI()
+        }
     }
   }
