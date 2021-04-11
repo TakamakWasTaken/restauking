@@ -114,7 +114,14 @@
     methods: {
       search(){
         console.log("Querry --> " + this.query);
-        this.$store.dispatch('getRestaurantsAsync',{location:'Lyon',search:this.query,open_now:this.openOnly,categories:this.selectedCategories[0]}).then(() => {
+        var cats="";
+        for(var i=0; i< this.selectedCategories.length; i++){
+          if(i==0)
+            cats +=this.selectedCategories[i];
+          else
+            cats+=";"+this.selectedCategories[i];
+        }
+        this.$store.dispatch('getRestaurantsAsync',{location:'Lyon',search:this.query,open_now:this.openOnly,categories:cats}).then(() => {
           this.restos = this.$store.state.restaurant.restaurants;
         });
       },
