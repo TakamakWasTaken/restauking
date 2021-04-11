@@ -1,12 +1,38 @@
 <template>
-  <v-container>
+  <v-container style="margin-top:12px;">
    
+    <v-text-field
+      v-model="query"
+      @keyup="search"
+      label="Rechercher un Restaurant">
+    </v-text-field>
+    <v-row>
+      <v-col cols="4">
+        <v-checkbox
+          v-model="categories"
+          label="Cat 1"
+        ></v-checkbox>
+      </v-col>
+    </v-row>
+    <v-range-slider
+      hint=""
+      min="1"
+      max="5"
+      label="Filtrer par note"
+      ticks="always"
+      tick-size="6"
+    ></v-range-slider>
+    <v-checkbox
+      v-model="openOnly"
+      @click="search"
+      label="Seulement les restaurants ouverts"
+    ></v-checkbox>
     <v-layout v-if="restos != undefined" align-center justify-center row fill-height>
+
       <v-flex
         v-for="r in restos"
         :key="r.id"
         xs4
-        sm3
         class="restoCardContainer">
         <v-card class="restoCard">
           <v-img v-if="r.image_url"
@@ -18,7 +44,7 @@
             class="restaurantImg"
           ></v-img>
           <div class="restaurantInfos">
-            <v-card-title primary-title>
+            <v-card-title primary-title class="restoName">
               <h2 class="headline mb-0">{{ r.name }}</h2>
             </v-card-title>
             <div class="restaurantLocation">
@@ -40,7 +66,7 @@
               size="24"
               :value="r.rating"
             ></v-rating>
-            <router-link class="detailsBtn" tag="button" :to="{ name: 'Details', params: { restaurantId: r.id }}">Voir le détail</router-link>
+            <router-link class="routerLink" tag="button" :to="{ name: 'Details', params: { restaurantId: r.id }}">Voir le détail</router-link>
 
           </div>
         </v-card>
@@ -57,7 +83,10 @@
 
     },
     data: () => ({
-      restos: undefined
+      restos: undefined,
+      query: "",
+      openOnly: false,
+      categories: []
     }),
     mounted: function () {
       var store = this.$store;
@@ -67,6 +96,14 @@
       store.dispatch('getRestaurantsAsync',{location:'Clermont-Ferrand',search:'',is_closed:true,categories:'Fast Food'}).then(() => {
        this.restos = store.state.restaurant.restaurants;
      });
+    },
+    methods: {
+      search(){
+        console.log("test" + this.query);
+        this.$store.dispatch('getRestaurantsAsync',{location:'Clermont-Ferrand',search:this.query,open_now:this.openOnly,categories:''}).then(() => {
+          this.restos = this.$store.state.restaurant.restaurants;
+        });
+      }
     }
   }
 </script>
