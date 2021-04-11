@@ -1,5 +1,5 @@
-# Restauking
-_**The king of the restaurant**_
+# RestauKing
+_**Le référencement des rois**_
 ## Made by
 - NICOLLET Gautier
 - LAURADOUX Alexis
@@ -7,8 +7,15 @@ _**The king of the restaurant**_
 ### NICOLLET Gautier
 - Vuetify  
 Add Vuetify  
-View list restaurants  
+Restaurants list View  
+Responsive Card Grid  
 Rating component  
+Details View  
+- Vue Router  
+Add Routing  
+- Research interface  
+All filters (text, is_open checkbox, categories and rating)
+
 
 ### LAURADOUX Alexis
 - .net core server for YelpAPI  

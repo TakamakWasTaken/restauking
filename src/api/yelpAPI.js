@@ -5,7 +5,7 @@
 const serverUrl = 'https://restauking.azurewebsites.net/restauking?param='
 const searchUrl = 'https://api.yelp.com/v3/businesses/search?'
 const detailsUrl = 'https://api.yelp.com/v3/businesses/'
-const autoCompleteUrl = 'https://api.yelp.com/v3/autocomplete'
+const autoCompleteUrl = 'https://api.yelp.com/v3/autocomplete?'
 const categoriesUrl = 'https://api.yelp.com/v3/categories'
 
 async function getRestaurantsAPI (location,search,open_now,categories) {
@@ -40,7 +40,7 @@ async function getRestaurantsAPI (location,search,open_now,categories) {
     }
 }
 async function getAutoCompleteRestaurantsAPI (search,latitude,longitude) {
-    url += '&text="'+search+'"'
+    var url = '&text="'+search+'"'
     url += '&latitude="'+latitude+'"'
     url += '&longitude="'+longitude+'"'
 
@@ -72,20 +72,6 @@ async function getRestaurantDetailsAPI (id) {
        console.log(error) 
     }
 }
-async function getRestaurantDetailsAPI (id) {
-    const axios = require('axios');
-    try {
-        console.log('axios.get()',serverUrl + encodeURIComponent(detailsUrl+id))
-    
-    const response =  await axios.get(serverUrl + encodeURIComponent(detailsUrl+id))
-
-    console.log('getRestaurantDetailsAPI(id:'+id+')',response.data)
-    
-    return response.data
-    } catch (error) {
-       console.log(error) 
-    }
-}
 async function getCategoriesAPI () {
     const axios = require('axios');
     try {
@@ -93,11 +79,11 @@ async function getCategoriesAPI () {
     
     const response =  await axios.get(serverUrl + encodeURIComponent(categoriesUrl))
 
-    console.log('getCategoriesAPI()',response.data)
+    console.log('getCategoriesAPI()',response.data.categories.filter(d => d.parent_aliases[0] == "restaurants" && d.country_whitelist.includes("FR")))
     
-    return response.data
+    return response.data.categories.filter(d => d.parent_aliases[0] == "restaurants" && d.country_whitelist.length == 0 && d.country_blacklist.length == 0)
     } catch (error) {
        console.log(error) 
     }
 }
-export {getRestaurantsAPI,getRestaurantDetailsAPI,getRestaurantsAPI,getCategoriesAPI,getAutoCompleteRestaurantsAPI}
+export {getRestaurantsAPI,getRestaurantDetailsAPI,getCategoriesAPI,getAutoCompleteRestaurantsAPI}

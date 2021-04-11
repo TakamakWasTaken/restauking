@@ -6,21 +6,30 @@
       @keyup="search"
       label="Rechercher un Restaurant">
     </v-text-field>
-    <v-row>
-      <v-col cols="4">
-        <v-checkbox
-          v-model="categories"
-          label="Cat 1"
+    <h3>Catégories:</h3>
+    <v-row class="searchCategoryContainer" v-if="categoriesAvailable != undefined">
+      <v-col v-for="c in categoriesAvailable" :key="c.id" cols="2">
+        <v-checkbox style="max-height: 20px;"
+          v-model="selectedCategories"
+          @click="search"
+          :value="c.title"
+          :label="c.title"
         ></v-checkbox>
       </v-col>
     </v-row>
+    <div v-else>
+      Loading available categories
+    </div>
     <v-range-slider
+      :tick-labels="starNumber"
       hint=""
       min="1"
       max="5"
+      step="0.5"
       label="Filtrer par note"
       ticks="always"
-      tick-size="6"
+      tick-size="5"
+      class="searchSlider"
     ></v-range-slider>
     <v-checkbox
       v-model="openOnly"
@@ -67,7 +76,6 @@
               :value="r.rating"
             ></v-rating>
             <router-link class="routerLink" tag="button" :to="{ name: 'Details', params: { restaurantId: r.id }}">Voir le détail</router-link>
-
           </div>
         </v-card>
       </v-flex>
@@ -86,23 +94,32 @@
       restos: undefined,
       query: "",
       openOnly: false,
-      categories: []
+      selectedCategories: [],
+      categoriesAvailable: [],
+      starNumber: [1,1.5,2,2.5,3,3.5,4,4.5,5]
     }),
     mounted: function () {
       var store = this.$store;
       // store.dispatch('getRestaurantsAsync');
       // store.dispatch('getRestaurantsAsync',{search:'',open_now:true,categories:'FastFood'});
       // store.dispatch('getDetailsRestaurantAsync','4qS4kIbGlGfswmUY-o37_g');
-      store.dispatch('getRestaurantsAsync',{location:'Lyon',search:'',is_closed:true,categories:'restaurants'}).then(() => {
+      store.dispatch('getRestaurantsAsync',{location:'',search:'',categories:''}).then(() => {
        this.restos = store.state.restaurant.restaurants;
+     });
+     
+      store.dispatch('getCategoriesAsync').then(() => {
+       this.categoriesAvailable = store.state.restaurant.categories;
      });
     },
     methods: {
       search(){
-        console.log("test" + this.query);
-        this.$store.dispatch('getRestaurantsAsync',{location:'Lyon',search:this.query,open_now:this.openOnly,categories:'Restaurant'}).then(() => {
+        console.log("Querry --> " + this.query);
+        this.$store.dispatch('getRestaurantsAsync',{location:'Lyon',search:this.query,open_now:this.openOnly,categories:this.selectedCategories[0]}).then(() => {
           this.restos = this.$store.state.restaurant.restaurants;
         });
+      },
+      test(){
+        console.log();
       }
     }
   }

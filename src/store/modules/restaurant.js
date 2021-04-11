@@ -1,4 +1,4 @@
-import {getRestaurantsAPI, getRestaurantDetailsAPI,getCategoriesAPI } from '../../api/yelpAPI'
+import {getRestaurantsAPI, getRestaurantDetailsAPI,getCategoriesAPI, getAutoCompleteRestaurantsAPI } from '../../api/yelpAPI'
 
 export default {
     state: {
