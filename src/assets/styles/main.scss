@@ -15,35 +15,57 @@ a {
 
 .restoCardContainer{
     flex-direction: row;
-    
     .restoCard{
         width:95%;
-        height:410px;
-        margin-bottom: 10px;
+        height:500px;
+        margin: 5px auto;
         .restaurantImg{
-            height: 200px;
             margin: auto;
             height: 50%;
         }
         .restaurantInfos{
             height: 50%;
             padding: 0 10px;
-            .restaurantLocation{
-                text-align: left;
-                padding-bottom: 5px;
-                display: flex;
-                .logoPosition{
-                    vertical-align: middle;
-                    max-height: 21px;
-                }
-            }
-            .categoryContainer{
-                .restaurantCategory{
-                    width:fit-content;
-                    padding:5px;
-                    margin-right: 10px;
-                }
-            }
         }
     }
+}
+.detailsContainer{
+    height: 80%;
+}
+#restoCardDetails{
+    height: 90%;
+    margin: auto;
+    .restaurantImg{
+        height: 50%;
+    }
+}
+
+.restoName{
+    display: block;
+}
+.restaurantLocation{
+    padding-bottom: 5px;
+    display: flex;
+    width: fit-content;
+    margin: auto;
+    .logoPosition{
+        vertical-align: middle;
+        max-height: 21px;
+    }
+}
+.categoryContainer{
+    width: fit-content;
+    margin: 0 auto;
+    .restaurantCategory{
+        width:fit-content;
+        padding:5px;
+        margin-right: 10px;
+    }
+}
+
+.routerLink{
+    background-color: rgba(0, 0, 0, 0.800);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
