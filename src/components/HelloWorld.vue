@@ -93,14 +93,14 @@
       // store.dispatch('getRestaurantsAsync');
       // store.dispatch('getRestaurantsAsync',{search:'',open_now:true,categories:'FastFood'});
       // store.dispatch('getDetailsRestaurantAsync','4qS4kIbGlGfswmUY-o37_g');
-      store.dispatch('getRestaurantsAsync',{location:'Clermont-Ferrand',search:'',is_closed:true,categories:'Fast Food'}).then(() => {
+      store.dispatch('getRestaurantsAsync',{location:'Lyon',search:'',is_closed:true,categories:'restaurants'}).then(() => {
        this.restos = store.state.restaurant.restaurants;
      });
     },
     methods: {
       search(){
         console.log("test" + this.query);
-        this.$store.dispatch('getRestaurantsAsync',{location:'Clermont-Ferrand',search:this.query,open_now:this.openOnly,categories:''}).then(() => {
+        this.$store.dispatch('getRestaurantsAsync',{location:'Lyon',search:this.query,open_now:this.openOnly,categories:'Restaurant'}).then(() => {
           this.restos = this.$store.state.restaurant.restaurants;
         });
       }
