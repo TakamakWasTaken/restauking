@@ -9,7 +9,7 @@ const autoCompleteUrl = 'https://api.yelp.com/v3/autocomplete?'
 const categoriesUrl = 'https://api.yelp.com/v3/categories'
 
 async function getRestaurantsAPI (location,search,open_now,categories) {
-    var url = 'limit=50&offest=940';
+    var url = 'limit=50';
     if(location != null && location != '')
     url += '&location="'+location+'"'
     else
@@ -22,9 +22,9 @@ async function getRestaurantsAPI (location,search,open_now,categories) {
     url += '&open_now='+open_now+''
 
     if(categories != null && categories != '')
-        url += '&categories="'+categories+'"'
+        url += '&categories='+categories
     else
-        url += '&categories="restaurants"'
+        url += '&categories=restaurants'
 
     const axios = require('axios');
     try {
@@ -41,8 +41,8 @@ async function getRestaurantsAPI (location,search,open_now,categories) {
 }
 async function getAutoCompleteRestaurantsAPI (search,latitude,longitude) {
     var url = '&text="'+search+'"'
-    url += '&latitude="'+latitude+'"'
-    url += '&longitude="'+longitude+'"'
+    url += '&latitude='+latitude
+    url += '&longitude='+longitude
 
     const axios = require('axios');
     try {
