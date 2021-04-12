@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <div class="reservationContainer">
     <v-dialog
       v-model="dialog"
       persistent
@@ -127,7 +127,7 @@
         </v-btn>
       </template>
     </v-snackbar>
-  </v-row>
+  </div>
 </template>
 
 <script>

@@ -37,37 +37,57 @@ a {
     }
 }
 .detailsContainer{
-    height: 80%;
+    height: 50%;
 }
-#restoCardDetails{
+.restoCardDetails{
     height: 90%;
     margin: auto;
     .restaurantImg{
         height: 50%;
+    }
+    .ratingDetails{
+        margin-left: 10%;
+    }
+    .reservationContainer{
+        margin-left: auto;
+        margin-right: 10%;
+        justify-content: center;
+    }
+    .restaurantInfos{
+        margin-bottom:20px;
     }
 }
 
 .restoName{
     display: block;
 }
+.reviewCountContainer{
+    margin-bottom:20px;
+}
 .restaurantLocation{
     padding-bottom: 5px;
     display: flex;
     width: fit-content;
     margin: auto;
-    .logoPosition{
-        vertical-align: middle;
-        max-height: 21px;
-    }
+}
+.logoIcons{
+    vertical-align: middle;
+    max-height: 21px;
+}
+.catTitle{
+    margin-top:20px;
 }
 .categoryContainer{
     width: fit-content;
-    margin: 0 auto;
+    margin: 0 auto 20px;
     .restaurantCategory{
         width:fit-content;
         padding:5px;
         margin-right: 10px;
     }
+}
+.hoursContainer{
+    margin-top:20px;
 }
 
 .routerLink{

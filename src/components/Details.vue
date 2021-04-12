@@ -1,6 +1,6 @@
 <template>
     <v-container class="detailsContainer">
-        <v-card class="restoCardDetails" id="restoCardDetails" v-if="resto != undefined">
+        <v-card class="restoCardDetails" v-if="resto != undefined">
           <v-img v-if="resto.image_url"
             :src="`${ resto.image_url }`"
             class="restaurantImg"
@@ -14,52 +14,56 @@
               {{ resto.name }}
             </v-card-title>
             <div class="restaurantLocation">
-              <img :src="require('../assets/position.png')" class="logoPosition" height="21px">
+              <img :src="require('../assets/position.png')" class="logoIcons" height="21px">
               {{ resto.location.city }}
               <div v-if="resto.price" style="margin-left: 5px;"> - {{ resto.price}}</div>
               
             </div>
             <div>
+                <img :src="require('../assets/phone.jpg')" class="logoIcons" height="21px">
                 {{ resto.display_phone }}
-            </div>
-            <div>
-                Nombre de vues: {{ resto.review_count }}
             </div>
             <div v-if="resto.transactions.length != 0">
                 <p v-for="t in resto.transactions" :key="t.id">{{ resto.transactions.title }}</p>
             </div>
             
-            <div v-if="resto.hours != undefined" >
+            <div v-if="resto.hours != undefined" class="hoursContainer">
                 <h4>Horaires d'ouverture:</h4>
-                <ul v-for="h in resto.hours[0].open" :key="h.id">
-                    <li >
+                <ul>
+                    <li v-for="h in resto.hours[0].open" :key="h.id">
                         {{getDay(h.day)}}: 
                         {{formatHour(h.start)}} - {{formatHour(h.end)}}
                     </li>
                 </ul>
             </div>
             <div v-else>Pas d'horaire indiqué</div>
+            <h4 class="catTitle">Catégories:</h4>
             <v-layout class="categoryContainer" v-if="resto.categories.length != 0">
-              <v-card class="restaurantCategory" v-for="c in resto.categories" :key="c.id">{{ c.title }}</v-card>
+                <v-card class="restaurantCategory" v-for="c in resto.categories" :key="c.id">{{ c.title }}</v-card>
 
             </v-layout>
-            <div v-else>no cat</div>
-            <v-rating
-              background-color="blue lighten-2"
-              color="blue"
-              half-increments
-              hover
-              readonly
-              length="5"
-              size="24"
-              :value="resto.rating"
-            ></v-rating>
-
+            <div v-else>Aucune catégorie trouvée</div>
+            <div v-if="resto.review_count != undefined" class="reviewCountContainer">
+                <b>Nombre de vues:</b> {{ resto.review_count }}
             </div>
-            <ModalReservation :id-restaurant="$route.params.restaurantId"></ModalReservation>
+            <v-row>
+                <v-rating
+                background-color="blue lighten-2"
+                color="blue"
+                half-increments
+                hover
+                readonly
+                length="5"
+                size="24"
+                :value="resto.rating"
+                class="ratingDetails"
+                ></v-rating>
+                <ModalReservation :id-restaurant="$route.params.restaurantId"></ModalReservation>
+            </v-row>
+            </div>
+            <router-link class="routerLink" tag="button" :to="{ name: 'Home'}">Retour</router-link>
         </v-card>
         <div v-else>Chargement du restaurant</div>
-        <router-link class="routerLink" tag="button" :to="{ name: 'Home'}">Retour</router-link>
     </v-container>
 </template>
 

@@ -1,18 +1,25 @@
 <template>
   <v-container style="margin-top:12px;">
-   
-    <v-text-field
-      v-model="query"
+    <v-autocomplete
+      dense
+      filled
+      solo
+      auto-select-first
+      label="Autocomplete search"
+      :search-input.sync="autoCompleteSearch"
+      :loading="loading"
+      :items="items"
+      item-text="name"
+      item-value="name"
       @keyup="search"
-      label="Rechercher un Restaurant">
-    </v-text-field>
+    ></v-autocomplete>
     <h3>Catégories:</h3>
     <v-row class="searchCategoryContainer" v-if="categoriesAvailable != undefined">
       <v-col v-for="c in categoriesAvailable" :key="c.id" cols="2">
         <v-checkbox style="max-height: 20px;"
           v-model="selectedCategories"
           @click="search"
-          :value="c.title"
+          :value="c.alias"
           :label="c.title"
         ></v-checkbox>
       </v-col>
@@ -30,16 +37,18 @@
       ticks="always"
       tick-size="5"
       class="searchSlider"
+      v-model="range"
+      @change="tes"
     ></v-range-slider>
     <v-checkbox
       v-model="openOnly"
       @click="search"
       label="Seulement les restaurants ouverts"
     ></v-checkbox>
-    <v-layout v-if="restos != undefined" align-center justify-center row fill-height>
+    <v-layout v-if="restaurantsFiltered != undefined" align-center justify-center row fill-height>
 
       <v-flex
-        v-for="r in restos"
+        v-for="r in restaurantsFiltered"
         :key="r.id"
         xs4
         class="restoCardContainer">
@@ -87,16 +96,18 @@
 <script>
   export default {
     name: 'HelloWorld',
-    computed: {
-
-    },
     data: () => ({
       restos: undefined,
       query: "",
+      autoCompQuery:null,
+      loading: false,
       openOnly: false,
       selectedCategories: [],
       categoriesAvailable: [],
-      starNumber: [1,1.5,2,2.5,3,3.5,4,4.5,5]
+      results: [],
+      starNumber: [1,1.5,2,2.5,3,3.5,4,4.5,5],
+      autoCompleteSearch: null,
+      range: [1,5],
     }),
     mounted: function () {
       var store = this.$store;
@@ -104,23 +115,57 @@
       // store.dispatch('getRestaurantsAsync',{search:'',open_now:true,categories:'FastFood'});
       // store.dispatch('getDetailsRestaurantAsync','4qS4kIbGlGfswmUY-o37_g');
       store.dispatch('getRestaurantsAsync',{location:'',search:'',categories:''}).then(() => {
-       this.restos = store.state.restaurant.restaurants;
-     });
-     
-      store.dispatch('getCategoriesAsync').then(() => {
-       this.categoriesAvailable = store.state.restaurant.categories;
-     });
+        this.restos = store.state.restaurant.restaurants;
+      });
+      
+        store.dispatch('getCategoriesAsync').then(() => {
+        this.categoriesAvailable = store.state.restaurant.categories;
+      });
+      
     },
     methods: {
       search(){
         console.log("Querry --> " + this.query);
-        this.$store.dispatch('getRestaurantsAsync',{location:'Lyon',search:this.query,open_now:this.openOnly,categories:this.selectedCategories[0]}).then(() => {
+        var cats="";
+        for(var i=0; i< this.selectedCategories.length; i++){
+          if(i==0)
+            cats +=this.selectedCategories[i];
+          else
+            cats+=","+this.selectedCategories[i];
+        }
+        this.$store.dispatch('getRestaurantsAsync',{location:'Lyon',search:this.query,open_now:this.openOnly,categories:cats}).then(() => {
           this.restos = this.$store.state.restaurant.restaurants;
         });
       },
-      test(){
-        console.log();
+      tes(){
+        console.log(this.range);
       }
-    }
+    },
+    watch: {
+      autoCompleteSearch (val) {
+        // Items have already been requested
+        if (this.isLoading) return
+
+        this.isLoading = true
+        
+        console.log("ICI: "+this.autoCompQuery);
+        this.$store.dispatch('getAutoCompleteRestaurantsAsync',{search:val,latitude:45.759060,longitude:4.847331}).then((result) => {
+          this.results = result;
+        }).finally(() => {
+          console.log(this.results);
+          this.isLoading = false;
+          this.query= val;
+          this.search();
+        });
+      },
+    },
+    computed: {
+      items(){
+        return this.results
+      },
+      restaurantsFiltered(){
+        return this.restos?.filter(x=> x.rating>= this.range[0] && x.rating<= this.range[1]);
+      }
+    },
   }
 </script>

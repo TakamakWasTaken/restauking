@@ -30,8 +30,8 @@ export default {
        async getCategoriesAsync (context) {
           context.commit('setCategories', await getCategoriesAPI())
         },
-        async getAutoCompleteRestaurantsAsync () {
-         return await getAutoCompleteRestaurantsAPI()
+        async getAutoCompleteRestaurantsAsync (context,param) {
+         return await getAutoCompleteRestaurantsAPI(param.search, param.latitude, param.longitude)
         }
     }
   }

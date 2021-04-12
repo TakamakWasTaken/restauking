@@ -3,6 +3,7 @@ _**Le référencement des rois**_
 ## Made by
 - NICOLLET Gautier
 - LAURADOUX Alexis
+
 ## Distribution of work
 ### NICOLLET Gautier
 - Vuetify  
@@ -14,7 +15,8 @@ Details View
 - Vue Router  
 Add Routing  
 - Research interface  
-All filters (text, is_open checkbox, categories and rating)
+All filters (text, autocomplete, is_open checkbox, categories and rating)
+
 
 
 ### LAURADOUX Alexis
@@ -23,6 +25,7 @@ A small api proxy for the request to YelpAPI.
 Host in azure
 - YelpAPI  
 All request to the api
+Autocomplete & category list
 - Firebase  
 All request to firebase  
 Create, update and read bookings  
