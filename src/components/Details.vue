@@ -1,7 +1,19 @@
 <template>
     <v-container class="detailsContainer">
-        <v-card class="restoCardDetails" v-if="resto != undefined">
-          <v-img v-if="resto.image_url"
+        <v-carousel v-if="resto.photos != undefined && resto.photos.length > 0"
+            cycle
+            height="400"
+            hide-delimiter-background
+            show-arrows-on-hover
+        >
+            <v-carousel-item
+            v-for="(photo, i) in resto.photos"
+            :key="i"
+            :src="photo"
+            >
+            </v-carousel-item>
+        </v-carousel>
+        <v-img v-else-if="resto.image_url"
             :src="`${ resto.image_url }`"
             class="restaurantImg"
           ></v-img>
@@ -9,6 +21,7 @@
             :src="require('../assets/restaurant-default.png')"
             class="restaurantImg"
           ></v-img>
+        <v-card class="restoCardDetails" v-if="resto != undefined">
           <div class="restaurantInfos">
             <v-card-title primary-title class="restoName">
               {{ resto.name }}

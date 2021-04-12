@@ -40,8 +40,9 @@ a {
     height: 50%;
 }
 .restoCardDetails{
-    height: 90%;
+    height: fit-content;
     margin: auto;
+    padding-bottom: 20px;
     .restaurantImg{
         height: 50%;
     }
@@ -60,9 +61,6 @@ a {
 
 .restoName{
     display: block;
-}
-.reviewCountContainer{
-    margin-bottom:20px;
 }
 .restaurantLocation{
     padding-bottom: 5px;
@@ -89,7 +87,9 @@ a {
 .hoursContainer{
     margin-top:20px;
 }
-
+.v-image__image--cover {
+    background-size: contain;
+}
 .routerLink{
     background-color: rgba(0, 0, 0, 0.800);
     color: white;

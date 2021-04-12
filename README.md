@@ -8,16 +8,18 @@ _**Le référencement des rois**_
 ### NICOLLET Gautier
 - Vuetify  
 Add Vuetify  
-Restaurants list View  
+- Restaurants list View  
 Responsive Card Grid  
 Rating component  
-Details View  
+- Details View  
+Display complete data  
+Display photos  
 - Vue Router  
 Add Routing  
 - Research interface  
-All filters (text, autocomplete, is_open checkbox, categories and rating)
-
-
+Text filter (with autocomplete)  
+Checkboxes (is_open & categories)  
+Range slider (rating)  
 
 ### LAURADOUX Alexis
 - .net core server for YelpAPI  
